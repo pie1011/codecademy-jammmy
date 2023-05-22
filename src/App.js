@@ -1,27 +1,29 @@
 import './App.css';
+import React from 'react';
+
+import SearchBar from './components/SearchBar';
+import SearchResults from './components/SearchResults';
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
         <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.js</code> and save to reload.
+          codecademy project <span className="heart">♥️</span> jammmy
         </p>
         <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <SearchBar />
+        </p>
+        <p>
+          <SearchResults />
         </p>
       </header>
+      <div className="App-body">
+        <p className='small'>
+        Photo by <a href="https://unsplash.com/fr/@blocks?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">blocks</a> on <a href="https://unsplash.com/images/things/music?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+        </p>
+        </div>
     </div>
   );
 }
