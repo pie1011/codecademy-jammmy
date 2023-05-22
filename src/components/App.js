@@ -1,10 +1,12 @@
 import './App.css';
 import React from 'react';
 
-import SearchBar from './components/SearchBar';
-import Track from './components/Track';
+import SearchBar from './SearchBar';
+import Track from './Track';
+import Spotify from "../util/Spotify";
 
-import { music } from './musicData';
+
+import { music } from '../musicData';
 
 
 function App() {
