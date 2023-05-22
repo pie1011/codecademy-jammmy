@@ -1,38 +1,69 @@
-import './App.css';
-import React from 'react';
+import React, { useState, useCallback } from "react";
+import "./App.css";
+import "./styles.css";
 
-import SearchBar from './SearchBar';
-import Track from './Track';
+import Playlist from "./Playlist";
+import SearchBar from "./SearchBar";
+import SearchResults from "./SearchResults";
 import Spotify from "../util/Spotify";
 
+const App = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [playlistName, setPlaylistName] = useState("New Playlist");
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
-import { music } from '../musicData';
+  const search = useCallback((term) => {
+    Spotify.search(term).then(setSearchResults);
+  }, []);
 
+  const addTrack = useCallback(
+    (track) => {
+      if (playlistTracks.some((savedTrack) => savedTrack.id === track.id))
+        return;
 
-function App() {
+      setPlaylistTracks((prevTracks) => [...prevTracks, track]);
+    },
+    [playlistTracks]
+  );
+
+  const removeTrack = useCallback((track) => {
+    setPlaylistTracks((prevTracks) =>
+      prevTracks.filter((currentTrack) => currentTrack.id !== track.id)
+    );
+  }, []);
+
+  const updatePlaylistName = useCallback((name) => {
+    setPlaylistName(name);
+  }, []);
+
+  const savePlaylist = useCallback(() => {
+    const trackUris = playlistTracks.map((track) => track.uri);
+    Spotify.savePlaylist(playlistName, trackUris).then(() => {
+      setPlaylistName("New Playlist");
+      setPlaylistTracks([]);
+    });
+  }, [playlistName, playlistTracks]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>
-          codecademy project <span className="heart">♥️</span> jammmy
-        </h1>
-        <SearchBar />
-      </header>
-      <section className="Track-list">
-        <h2>Track List</h2>
-        {
-          music.map((song, index) =>
-            <Track key={index} musicObject={song} />
-          )
-        }
-      </section>
-      <div className="App-body">
-        <p className='small'>
-          Photo by <a href="https://unsplash.com/fr/@blocks?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">blocks</a> on <a href="https://unsplash.com/images/things/music?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-        </p>
+    <div>
+      <h1>
+        codecademy project - ja<span className="highlight">mmm</span>y
+      </h1>
+      <div className="App">
+        <SearchBar onSearch={search} />
+        <div className="App-playlist">
+          <SearchResults searchResults={searchResults} onAdd={addTrack} />
+          <Playlist
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+            onNameChange={updatePlaylistName}
+            onRemove={removeTrack}
+            onSave={savePlaylist}
+          />
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;
