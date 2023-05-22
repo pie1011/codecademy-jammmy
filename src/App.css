@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  padding: 1rem;
+  color: white;
+  min-height: 100vh;
+
 }
 
 .App-logo {
@@ -9,13 +13,13 @@
 
 .App-header {
   /* background-color: #282c34; */
-  min-height: 100vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.5rem;
 }
 
 .App-link {
@@ -30,15 +34,31 @@
   font-size: 0.75rem;
 }
 
-.search {
+.search, .Track-list {
   background-color: rgba(0, 16, 80, 0.65);
-  width: 100%;
-  padding: 0.5rem;
   border: 1px solid #ccc;
-  border-radius: 0.25rem;
   margin-bottom: 1rem;
 }
+.Track-list {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+}
 
+.Track-body {
+  margin: none;
+  border-left: none;
+  border-right: none;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+.Track-body:hover {
+  background-color: rgba(0, 16, 80, 0.65);
+
+}
 .class-body {
   display: flex;
   flex-direction: column;
