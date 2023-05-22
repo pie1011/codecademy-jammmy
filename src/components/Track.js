@@ -3,12 +3,10 @@ import TrackBody from './TrackBody';
 
 function Track(props) {
     return (
-        <div class="track">
-        <h1>Track</h1>
-        <p>
-            <TrackBody track={props.musicObject.track} />
-        </p>
-        </div>
+        <>
+            <h2>Track</h2>
+            <TrackBody track={props.musicObject.track} artist={props.musicObject.artist} album={props.musicObject.album} />
+        </>
     );
 }
 
