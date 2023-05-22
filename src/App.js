@@ -4,6 +4,8 @@ import React from 'react';
 import SearchBar from './components/SearchBar';
 import SearchResults from './components/SearchResults';
 
+import { music } from './musicData';
+
 
 function App() {
   return (
